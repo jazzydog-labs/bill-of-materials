@@ -200,4 +200,30 @@ repos:
       bom_integration: complete
       context_file_coverage: comprehensive
       last_updated: "2025-01-27"
-      notes: "Self-documenting registry with comprehensive schema and examples" 
+      notes: "Self-documenting registry with comprehensive schema and examples"
+
+  - name: panorama
+    path: ~/dev/jazzydog-labs/foundry/panorama
+    description: Documentation and context aggregator for the foundry ecosystem - generates unified context files for AI agents and developer reference
+    remotes:
+      origin: https://github.com/jazzydog-labs/panorama.git
+    documentation:
+      readme: README.md
+      guides:
+        - README.md
+    context_files:
+      code:
+        - collect.py
+        - test_collect.py
+        - update_config.py
+      config:
+        - config/repos.yaml
+      examples:
+        - README.md
+    type: aggregation
+    integration_quality:
+      documentation_completeness: excellent
+      bom_integration: complete
+      context_file_coverage: comprehensive
+      last_updated: "2025-01-27"
+      notes: "Well-documented aggregation tool with comprehensive examples and configuration" 
