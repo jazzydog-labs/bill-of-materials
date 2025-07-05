@@ -1,0 +1,203 @@
+repos:
+  - name: foundry-bootstrap
+    path: ~/dev/jazzydog-labs/foundry/foundry-bootstrap
+    description: Canonical bootstrapper for the foundry ecosystem - sets up global tooling and environment configuration
+    remotes:
+      origin: https://github.com/jazzydog-labs/foundry-bootstrap.git
+    documentation:
+      readme: README.md
+      architecture:
+        - README.md
+      guides:
+        - README.md
+    context_files:
+      config:
+        - config/brew.yaml
+        - config/pipx.yaml
+        - config/pyenv_version.txt
+        - config/envrc_template
+      code:
+        - bootstrap.sh
+        - orchestrate/main.py
+        - install/install_brew.sh
+        - install/install_pyenv.sh
+        - install/install_python.sh
+        - install/setup_python_orchestrator.sh
+      tests:
+        - test_setup.py
+    type: bootstrap
+    integration_quality:
+      documentation_completeness: excellent
+      bom_integration: complete
+      context_file_coverage: comprehensive
+      last_updated: "2025-01-27"
+      notes: "Well-documented with comprehensive configuration and orchestration files"
+
+  - name: loom
+    path: ~/dev/jazzydog-labs/foundry/loom
+    description: Central orchestrator for the foundry ecosystem - clones, updates, and coordinates commands across all sibling repos
+    remotes:
+      origin: https://github.com/jazzydog-labs/loom.git
+    documentation:
+      readme: README.md
+      architecture:
+        - README.md
+      guides:
+        - README.md
+    context_files:
+      config:
+        - repos.yaml
+        - config/defaults.yaml
+      code:
+        - loom.py
+        - loomlib/config.py
+        - loomlib/git.py
+        - loomlib/repo_manager.py
+      examples:
+        - README.md
+    type: orchestrator
+    integration_quality:
+      documentation_completeness: excellent
+      bom_integration: complete
+      context_file_coverage: comprehensive
+      last_updated: "2025-01-27"
+      notes: "Core orchestrator with excellent documentation and modular architecture"
+
+  - name: crucible
+    path: ~/dev/jazzydog-labs/foundry/crucible
+    description: Domain modeling and entity design workspace - ideation space for conceptual work
+    remotes:
+      origin: https://github.com/jazzydog-labs/crucible.git
+    documentation:
+      readme: README.md
+    context_files:
+      data:
+        - blueprints/0_domain_expert_persona.md
+        - blueprints/1_brainstorm_entities.md
+    type: design
+    integration_quality:
+      documentation_completeness: minimal
+      bom_integration: basic
+      context_file_coverage: basic
+      last_updated: "2025-01-27"
+      notes: "Early-stage design repository with minimal documentation - needs more context files and design artifacts"
+
+  - name: forge
+    path: ~/dev/jazzydog-labs/foundry/forge
+    description: Code generation and scaffolding workspace - generative factory for code creation
+    remotes:
+      origin: https://github.com/jazzydog-labs/forge.git
+    documentation:
+      readme: README.md
+    context_files:
+      data:
+        - README.md
+    type: generation
+    integration_quality:
+      documentation_completeness: minimal
+      bom_integration: basic
+      context_file_coverage: minimal
+      last_updated: "2025-01-27"
+      notes: "Early-stage generation repository - needs implementation and documentation"
+
+  - name: vault
+    path: ~/dev/jazzydog-labs/foundry/vault
+    description: Canonical, read-only registry for secure storage and secrets
+    remotes:
+      origin: https://github.com/jazzydog-labs/vault.git
+    documentation:
+      readme: README.md
+    context_files:
+      data:
+        - README.md
+    type: storage
+    integration_quality:
+      documentation_completeness: minimal
+      bom_integration: basic
+      context_file_coverage: minimal
+      last_updated: "2025-01-27"
+      notes: "Early-stage storage repository - needs implementation and security documentation"
+
+  - name: ledger
+    path: ~/dev/jazzydog-labs/foundry/ledger
+    description: Historical ledger of all generation sessions - tracks prompts, artifacts, and session metadata
+    remotes:
+      origin: https://github.com/jazzydog-labs/ledger.git
+    documentation:
+      readme: README.md
+      guides:
+        - README.md
+    context_files:
+      code:
+        - scripts/log.sh
+        - scripts/new_phase.py
+      data:
+        - sessions/
+      examples:
+        - scripts/README.md
+    type: tracking
+    integration_quality:
+      documentation_completeness: good
+      bom_integration: complete
+      context_file_coverage: good
+      last_updated: "2025-01-27"
+      notes: "Well-structured tracking system with good documentation and session management"
+
+  - name: just-aliases
+    path: ~/dev/jazzydog-labs/foundry/just-aliases
+    description: Modal alias system for Zsh that allows switching between different sets of aliases dynamically
+    remotes:
+      origin: https://github.com/jazzydog-labs/just-aliases.git
+    documentation:
+      readme: README.md
+      guides:
+        - README.md
+    context_files:
+      code:
+        - mode_manager.py
+        - build-aliases.py
+        - just-aliases.zsh
+      config:
+        - aliases/development
+        - aliases/system
+        - aliases/minimal
+        - aliases/build.zsh
+      examples:
+        - README.md
+        - documents/high-level-idea.md
+    type: tooling
+    integration_quality:
+      documentation_completeness: excellent
+      bom_integration: complete
+      context_file_coverage: comprehensive
+      last_updated: "2025-01-27"
+      notes: "Well-documented tooling with comprehensive examples and configuration"
+
+  - name: bill-of-materials
+    path: ~/dev/jazzydog-labs/foundry/bill-of-materials
+    description: Canonical, read-only source of truth for the full ecosystem layout and repository metadata
+    remotes:
+      origin: https://github.com/jazzydog-labs/bill-of-materials.git
+    documentation:
+      readme: README.md
+      architecture:
+        - README.md
+      guides:
+        - README.md
+    context_files:
+      config:
+        - repos.yaml
+      data:
+        - schema/repository.schema.json
+      examples:
+        - examples/python_consumer.py
+        - examples/shell_consumer.sh
+        - examples/integration_analyzer.py
+        - examples/repository-bom-example.yaml
+    type: registry
+    integration_quality:
+      documentation_completeness: excellent
+      bom_integration: complete
+      context_file_coverage: comprehensive
+      last_updated: "2025-01-27"
+      notes: "Self-documenting registry with comprehensive schema and examples" 

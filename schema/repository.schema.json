@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Foundry Ecosystem Repository Schema",
+  "description": "Schema for defining repositories in the foundry ecosystem with context file categorization",
+  "type": "object",
+  "properties": {
+    "repos": {
+      "type": "array",
+      "description": "List of repositories in the ecosystem",
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "description", "remotes"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Unique identifier for the repository",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "description": "Local filesystem path where the repository is located",
+            "pattern": "^[~/]",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the repository's purpose",
+            "minLength": 1
+          },
+          "remotes": {
+            "type": "object",
+            "description": "Git remote configurations",
+            "required": ["origin"],
+            "properties": {
+              "origin": {
+                "type": "string",
+                "description": "Primary remote URL for the repository",
+                "format": "uri",
+                "pattern": "^https://github\\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+\\.git$"
+              },
+              "upstream": {
+                "type": "string",
+                "description": "Optional upstream remote URL",
+                "format": "uri",
+                "pattern": "^https://github\\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+\\.git$"
+              }
+            },
+            "additionalProperties": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "documentation": {
+            "type": "object",
+            "description": "High-level documentation files for human and AI consumption",
+            "properties": {
+              "readme": {
+                "type": "string",
+                "description": "Primary README file (usually README.md)",
+                "pattern": "^[a-zA-Z0-9_/-]+\\.(md|txt)$"
+              },
+              "architecture": {
+                "type": "array",
+                "description": "Architecture and design documents",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(md|txt|pdf)$"
+                },
+                "uniqueItems": true
+              },
+              "api_docs": {
+                "type": "array",
+                "description": "API documentation files",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(md|txt|yaml|yml|json)$"
+                },
+                "uniqueItems": true
+              },
+              "guides": {
+                "type": "array",
+                "description": "User guides and tutorials",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(md|txt)$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "additionalProperties": false
+          },
+          "context_files": {
+            "type": "object",
+            "description": "Detailed context files for AI tools and deep integration",
+            "properties": {
+              "config": {
+                "type": "array",
+                "description": "Configuration files that define behavior",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(yaml|yml|json|toml|ini|conf)$"
+                },
+                "uniqueItems": true
+              },
+              "code": {
+                "type": "array",
+                "description": "Key source code files for understanding implementation",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(py|js|ts|go|rs|java|c|cpp|h|hpp|sh|zsh|bash)$"
+                },
+                "uniqueItems": true
+              },
+              "tests": {
+                "type": "array",
+                "description": "Test files that demonstrate usage and behavior",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(py|js|ts|go|rs|java|c|cpp|sh)$"
+                },
+                "uniqueItems": true
+              },
+              "examples": {
+                "type": "array",
+                "description": "Example files and usage patterns",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(py|js|ts|go|rs|java|c|cpp|sh|md|txt|yaml|yml|json)$"
+                },
+                "uniqueItems": true
+              },
+              "data": {
+                "type": "array",
+                "description": "Data files, schemas, and structured information",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_/-]+\\.(json|yaml|yml|xml|csv|sql|db)$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "additionalProperties": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Category or type of the repository",
+            "enum": [
+              "bootstrap",
+              "orchestrator", 
+              "design",
+              "generation",
+              "storage",
+              "tracking",
+              "tooling",
+              "registry",
+              "service"
+            ]
+          },
+          "dependencies": {
+            "type": "array",
+            "description": "Other repositories this repository depends on",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            },
+            "uniqueItems": true
+          },
+          "tags": {
+            "type": "array",
+            "description": "Optional tags for categorization and filtering",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            },
+            "uniqueItems": true
+          },
+          "integration_quality": {
+            "type": "object",
+            "description": "Metadata about how well this repository is integrated with the ecosystem",
+            "properties": {
+              "documentation_completeness": {
+                "type": "string",
+                "description": "How complete the documentation is",
+                "enum": ["excellent", "good", "partial", "minimal", "missing"]
+              },
+              "bom_integration": {
+                "type": "string",
+                "description": "How well this repo is represented in the bill-of-materials",
+                "enum": ["complete", "partial", "basic", "missing"]
+              },
+              "context_file_coverage": {
+                "type": "string",
+                "description": "How well context files are documented for AI tools",
+                "enum": ["comprehensive", "good", "basic", "minimal", "none"]
+              },
+              "last_updated": {
+                "type": "string",
+                "format": "date",
+                "description": "When this repository's BOM entry was last updated"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Additional notes about integration status or gaps"
+              }
+            },
+            "additionalProperties": false
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata for the repository",
+            "properties": {
+              "created": {
+                "type": "string",
+                "format": "date"
+              },
+              "maintainer": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["active", "deprecated", "experimental", "archived"]
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": ["repos"],
+  "additionalProperties": false
+} 

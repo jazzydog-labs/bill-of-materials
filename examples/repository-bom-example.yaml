@@ -1,0 +1,50 @@
+# Example .bom.yaml file for an individual repository
+# This would be placed in the root of each repository
+
+name: loom
+description: Central orchestrator for the foundry ecosystem - clones, updates, and coordinates commands across all sibling repos
+type: orchestrator
+
+# High-level documentation files
+documentation:
+  readme: README.md
+  architecture:
+    - README.md
+  guides:
+    - README.md
+
+# Detailed context files for AI tools and deep integration
+context_files:
+  config:
+    - repos.yaml
+    - config/defaults.yaml
+  code:
+    - loom.py
+    - loomlib/config.py
+    - loomlib/git.py
+    - loomlib/repo_manager.py
+  examples:
+    - README.md
+
+# Integration quality self-assessment
+integration_quality:
+  documentation_completeness: excellent
+  context_file_coverage: comprehensive
+  last_updated: "2025-01-27"
+  notes: "Core orchestrator with excellent documentation and modular architecture"
+
+# Optional: Dependencies on other repositories
+dependencies:
+  - foundry-bootstrap
+
+# Optional: Tags for categorization
+tags:
+  - core
+  - orchestration
+  - python
+
+# Optional: Additional metadata
+metadata:
+  maintainer: "jazzydog-labs"
+  status: "active"
+  created: "2024-01-01" 
