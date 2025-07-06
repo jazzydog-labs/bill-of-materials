@@ -1,0 +1,11 @@
+name: bill-of-materials
+description: Canonical, read-only source of truth for the full ecosystem layout and repository metadata
+type: registry
+remotes:
+  origin: https://github.com/jazzydog-labs/bill-of-materials.git
+integration_quality:
+  documentation_completeness: excellent
+  bom_integration: complete
+  context_file_coverage: comprehensive
+  last_updated: "2025-01-27"
+  notes: "Self-documenting registry with comprehensive ecosystem metadata" 
